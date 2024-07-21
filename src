@@ -1,0 +1,167 @@
+local VulkanWare = {}
+
+local CORE = game:GetService("CoreGui")
+local UIS = game:GetService("UserInputService")
+local TWEEN = game:GetService("TweenService")
+local RS = game:GetService("RunService")
+
+function VulkanWare:Init(title)
+    local Vulkan = Instance.new("ScreenGui")
+    local Classic = Instance.new("Frame")
+    local ClassicCorner = Instance.new("UICorner")
+    local side = Instance.new("Frame")
+    local SideCorner = Instance.new("UICorner")
+    local tabHolder = Instance.new("Frame")
+    local TabLayout = Instance.new("UIListLayout")
+    local Settings = Instance.new("ImageButton")
+    local top = Instance.new("Frame")
+    local UICorner_5 = Instance.new("UICorner")
+    local title = Instance.new("TextLabel")
+    local menubind = Instance.new("TextLabel")
+    local exit = Instance.new("ImageButton")
+    local center = Instance.new("Frame")
+    local UICorner_6 = Instance.new("UICorner")
+    local elementHolder = Instance.new("Frame")
+    local scroll = Instance.new("ScrollingFrame")
+    local UIListLayout_2 = Instance.new("UIListLayout")
+
+    Vulkan.Name = "VulkanLib"
+    Vulkan.Parent = CORE
+    Vulkan.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+    Classic.Name = "Classic"
+    Classic.Parent = Vulkan
+    Classic.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    Classic.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Classic.BorderSizePixel = 0
+    Classic.Position = UDim2.new(0.272727281, 0, 0.208737865, 0)
+    Classic.Size = UDim2.new(0, 600, 0, 360)
+
+    ClassicCorner.CornerRadius = UDim.new(0, 10)
+    ClassicCorner.Parent = Classic
+
+    side.Name = "side"
+    side.Parent = Classic
+    side.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    side.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    side.BorderSizePixel = 0
+    side.Position = UDim2.new(-0.00060607912, 0, 0, 0)
+    side.Size = UDim2.new(0, 150, 0, 359)
+
+    SideCorner.CornerRadius = UDim.new(0, 10)
+    SideCorner.Parent = side
+
+    tabHolder.Name = "tabHolder"
+    tabHolder.Parent = side
+    tabHolder.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+    tabHolder.BackgroundTransparency = 1.000
+    tabHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    tabHolder.BorderSizePixel = 0
+    tabHolder.Position = UDim2.new(0.0727274567, 0, 0.153203338, 0)
+    tabHolder.Size = UDim2.new(0, 128, 0, 295)
+
+    TabLayout.Parent = tabHolder
+    TabLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    TabLayout.Padding = UDim.new(0, 7)
+
+    Settings.Name = "Settings"
+    Settings.Parent = side
+    Settings.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Settings.BackgroundTransparency = 1.000
+    Settings.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Settings.BorderSizePixel = 0
+    Settings.Position = UDim2.new(0.0683333352, 0, 0.915691733, 0)
+    Settings.Size = UDim2.new(0, 20, 0, 20)
+    Settings.Image = "rbxassetid://18551934265"
+
+    top.Name = "top"
+    top.Parent = Classic
+    top.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    top.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    top.BorderSizePixel = 0
+    top.Size = UDim2.new(0, 600, 0, 45)
+
+    UICorner_5.CornerRadius = UDim.new(0, 10)
+    UICorner_5.Parent = top
+
+    title.Name = "title"
+    title.Parent = top
+    title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    title.BackgroundTransparency = 1.000
+    title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    title.BorderSizePixel = 0
+    title.Position = UDim2.new(0.00772735616, 0, 0.155555561, 0)
+    title.Size = UDim2.new(0, 138, 0, 35)
+    title.Font = Enum.Font.Unknown
+    title.Text = "VulkanWare"
+    title.TextColor3 = Color3.fromRGB(80, 135, 255)
+    title.TextSize = 18.000
+    title.TextStrokeColor3 = Color3.fromRGB(83, 53, 255)
+
+    menubind.Name = "menubind"
+    menubind.Parent = top
+    menubind.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    menubind.BackgroundTransparency = 1.000
+    menubind.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    menubind.BorderSizePixel = 0
+    menubind.Position = UDim2.new(0.249393925, 0, 0.155555561, 0)
+    menubind.Size = UDim2.new(0, 250, 0, 35)
+    menubind.Font = Enum.Font.Unknown
+    menubind.Text = "Interface Bind: [ Left Control ]"
+    menubind.TextColor3 = Color3.fromRGB(100, 100, 100)
+    menubind.TextSize = 12.000
+    menubind.TextTransparency = 0.500
+    menubind.TextXAlignment = Enum.TextXAlignment.Left
+
+    exit.Name = "exit"
+    exit.Parent = top
+    exit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    exit.BackgroundTransparency = 1.000
+    exit.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    exit.BorderSizePixel = 0
+    exit.Position = UDim2.new(0.939999998, 0, 0.271247357, 0)
+    exit.Size = UDim2.new(0, 20, 0, 20)
+    exit.Image = "rbxassetid://18553412845"
+
+    center.Name = "center"
+    center.Parent = Classic
+    center.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    center.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    center.BorderSizePixel = 0
+    center.Position = UDim2.new(0.249393925, 0, 0.125, 0)
+    center.Size = UDim2.new(0, 449, 0, 313)
+
+    UICorner_6.CornerRadius = UDim.new(0, 10)
+    UICorner_6.Parent = center
+
+    elementHolder.Name = "elementHolder"
+    elementHolder.Parent = center
+    elementHolder.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    elementHolder.BackgroundTransparency = 1.000
+    elementHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    elementHolder.BorderSizePixel = 0
+    elementHolder.Size = UDim2.new(0, 450, 0, 315)
+
+    scroll.Name = "scroll"
+    scroll.Parent = elementHolder
+    scroll.Active = true
+    scroll.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+    scroll.BackgroundTransparency = 1.000
+    scroll.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    scroll.BorderSizePixel = 0
+    scroll.Position = UDim2.new(0.0222222228, 0, 0.0285714287, 0)
+    scroll.Size = UDim2.new(0, 429, 0, 295)
+    scroll.ZIndex = 2
+    scroll.CanvasPosition = Vector2.new(0, 177.5)
+    scroll.CanvasSize = UDim2.new(0, 0, 1.5, 0)
+    scroll.ScrollBarThickness = 2
+
+    UIListLayout_2.Parent = scroll
+    UIListLayout_2.HorizontalAlignment = Enum.HorizontalAlignment.Center
+    UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+    UIListLayout_2.Padding = UDim.new(0, 9)
+    
+end
+
+
+return VulkanWare
