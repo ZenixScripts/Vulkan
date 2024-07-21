@@ -6,6 +6,9 @@ local TWEEN = game:GetService("TweenService")
 local RS = game:GetService("RunService")
 
 function VulkanWare:Init(title)
+    self.tabs = {}
+    self.tabContentHolders = {}
+
     local Vulkan = Instance.new("ScreenGui")
     local Classic = Instance.new("Frame")
     local ClassicCorner = Instance.new("UICorner")
@@ -16,7 +19,7 @@ function VulkanWare:Init(title)
     local Settings = Instance.new("ImageButton")
     local top = Instance.new("Frame")
     local UICorner_5 = Instance.new("UICorner")
-    local title = Instance.new("TextLabel")
+    local titleL = Instance.new("TextLabel")
     local menubind = Instance.new("TextLabel")
     local exit = Instance.new("ImageButton")
     local center = Instance.new("Frame")
@@ -84,19 +87,19 @@ function VulkanWare:Init(title)
     UICorner_5.CornerRadius = UDim.new(0, 10)
     UICorner_5.Parent = top
 
-    title.Name = "title"
-    title.Parent = top
-    title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    title.BackgroundTransparency = 1.000
-    title.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    title.BorderSizePixel = 0
-    title.Position = UDim2.new(0.00772735616, 0, 0.155555561, 0)
-    title.Size = UDim2.new(0, 138, 0, 35)
-    title.Font = Enum.Font.Unknown
-    title.Text = "VulkanWare"
-    title.TextColor3 = Color3.fromRGB(80, 135, 255)
-    title.TextSize = 18.000
-    title.TextStrokeColor3 = Color3.fromRGB(83, 53, 255)
+    titleL.Name = "title"
+    titleL.Parent = top
+    titleL.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    titleL.BackgroundTransparency = 1.000
+    titleL.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    titleL.BorderSizePixel = 0
+    titleL.Position = UDim2.new(0.00772735616, 0, 0.155555561, 0)
+    titleL.Size = UDim2.new(0, 138, 0, 35)
+    titleL.Font = Enum.Font.Unknown
+    titleL.Text = title
+    titleL.TextColor3 = Color3.fromRGB(80, 135, 255)
+    titleL.TextSize = 18.000
+    titleL.TextStrokeColor3 = Color3.fromRGB(83, 53, 255)
 
     menubind.Name = "menubind"
     menubind.Parent = top
@@ -134,6 +137,8 @@ function VulkanWare:Init(title)
     UICorner_6.CornerRadius = UDim.new(0, 10)
     UICorner_6.Parent = center
 
+    self.center = center
+    
     elementHolder.Name = "elementHolder"
     elementHolder.Parent = center
     elementHolder.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -160,7 +165,95 @@ function VulkanWare:Init(title)
     UIListLayout_2.HorizontalAlignment = Enum.HorizontalAlignment.Center
     UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
     UIListLayout_2.Padding = UDim.new(0, 9)
+
+    local contentHolder = Instance.new("Frame")
+    contentHolder.Name = "contentHolder"
+    contentHolder.Parent = self.center
+    contentHolder.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    contentHolder.BackgroundTransparency = 1.000
+    contentHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    contentHolder.BorderSizePixel = 0
+    contentHolder.Size = UDim2.new(1, -150, 1, -45)
+    contentHolder.Visible = false  -- Hide initially
+
+    self.tabContentHolders[title] = elementHolder
+end
+
+function VulkanWare:AddTab(title)
+    local tabTemplate = Instance.new("Frame")
+    local bg = Instance.new("Frame")
+    local text = Instance.new("TextLabel")
+    local UICorner_3 = Instance.new("UICorner")
+    local indicator = Instance.new("Frame")
+
+    tabTemplate.Name = "tabTemplate"
+    tabTemplate.Parent = tabHolder
+    tabTemplate.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    tabTemplate.BackgroundTransparency = 1.000
+    tabTemplate.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    tabTemplate.BorderSizePixel = 0
+    tabTemplate.Size = UDim2.new(0, 132, 0, 30)
     
+    bg.Name = "bg"
+    bg.Parent = tabTemplate
+    bg.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    bg.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    bg.BorderSizePixel = 0
+    bg.Size = UDim2.new(0, 132, 0, 30)
+    
+    text.Name = "text"
+    text.Parent = bg
+    text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    text.BackgroundTransparency = 1.000
+    text.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    text.BorderSizePixel = 0
+    text.Size = UDim2.new(0, 125, 0, 30)
+    text.Font = Enum.Font.Ubuntu
+    text.Text = title
+    text.TextColor3 = Color3.fromRGB(255, 255, 255)
+    text.TextSize = 13.000
+    
+    UICorner_3.CornerRadius = UDim.new(0, 5)
+    UICorner_3.Parent = bg
+    
+    indicator.Name = "indicator"
+    indicator.Parent = bg
+    indicator.BackgroundColor3 = Color3.fromRGB(80, 135, 255)
+    indicator.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    indicator.BorderSizePixel = 0
+    indicator.Position = UDim2.new(0.980000019, 0, 0, 0)
+    indicator.Size = UDim2.new(0, 3, 0, 30)
+
+    tabTemplate.MouseButton1Click:Connect(function()
+        for _, v in ipairs(tabHolder:GetChildren()) do
+            if v:IsA("Frame") and v:FindFirstChild("bg") then
+                v.bg.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+                v.bg.TextColor3 = Color3.fromRGB(255, 255, 255)
+                v.indicator.Visible = false
+            end
+        end
+        
+        bg.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        text.TextColor3 = Color3.fromRGB(80, 135, 255)
+        indicator.Visible = true
+        
+        for _, content in pairs(self.tabContentHolders) do
+            content.Visible = false
+        end
+        self.tabContentHolders[title].Visible = true
+    end)
+    
+    local contentHolder = Instance.new("Frame")
+    contentHolder.Name = "contentHolder"
+    contentHolder.Parent = self.center
+    contentHolder.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    contentHolder.BackgroundTransparency = 1.000
+    contentHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    contentHolder.BorderSizePixel = 0
+    contentHolder.Size = UDim2.new(1, -150, 1, -45)
+    contentHolder.Visible = false
+
+    self.tabContentHolders[title] = contentHolder
 end
 
 
